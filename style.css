@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background: black;
+}
+
+/* 배경 캔버스 */
+#startBgCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+/* 시작 화면 UI */
+#startScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    text-align: center;
+
+    opacity: 0; /* 처음엔 숨겨짐 */
+    transition: opacity 1.5s;
+
+    z-index: 2;
+}
+
+/* 제목 */
+#gameTitle {
+    font-size: 64px;
+    margin-bottom: 40px;
+}
+
+/* 메뉴 버튼 */
+.menuBtn {
+    width: 220px;
+    padding: 15px;
+    margin: 10px;
+    font-size: 20px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    cursor: pointer;
+}
+
+.menuBtn:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+/* 게임 캔버스 */
+#gameCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0; /* 뒤에 있어야 함 */
+}

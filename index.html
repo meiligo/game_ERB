@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>감정연구소</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 🔹 시작 화면 배경 -->
+    <canvas id="startBgCanvas"></canvas>
+
+    <!-- 🔹 시작 화면 UI -->
+    <div id="startScreen">
+        <h1 id="gameTitle">감정연구소</h1>
+
+        <button id="startBtn" class="menuBtn">게임 시작</button>
+        <button id="continueBtn" class="menuBtn">이어하기</button>
+        <button id="settingsBtn" class="menuBtn">설정</button>
+        <button id="exitBtn" class="menuBtn">종료</button>
+    </div>
+
+    <!-- 🔹 실제 게임 캔버스 -->
+    <canvas id="gameCanvas"></canvas>
+
+    <script src="game.js"></script>
+</body>
+</html>
