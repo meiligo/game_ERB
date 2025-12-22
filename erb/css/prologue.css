@@ -1,0 +1,617 @@
+/* =========================
+   기본 리셋
+========================= */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #0b0b0e;
+  color: white;
+  font-family: "Pretendard", sans-serif;
+}
+
+/* =========================
+   전체 앱
+========================= */
+#app {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  background: #111;
+}
+
+/* =========================
+   게임 + 사이드바 묶음
+========================= */
+#gameWrapper {
+  display: flex;
+  height: 100%;
+}
+
+/* =========================
+   게임 영역 (1280 고정)
+========================= */
+#stageWrap {
+  width: 1280px;
+  height: 100%;
+  position: relative;
+  background: #000;
+}
+
+/* 실제 게임 스테이지 */
+#stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#bg {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  z-index: 0;
+}
+
+#objects {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* =========================
+   사이드바 (1280px 바로 옆)
+========================= */
+#sidePanel {
+  width: 80px;
+  height: 100%;
+  background: linear-gradient(180deg, #4b0f0f, #2a0808);
+  border-left: 1px solid rgba(255,255,255,0.08);
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding-top: 16px;
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+/* =========================
+   대화창 (게임 내부)
+========================= */
+#dialogue {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 30%;
+  padding: 20px 32px;
+
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.85),
+    rgba(0,0,0,0.35)
+  );
+
+  border-top: 1px solid rgba(255,255,255,0.1);
+  z-index: 10;
+}
+
+#speaker {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+#text {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+#nextBtn {
+  margin-top: 12px;
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#nextBtn:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* =========================
+   오버레이 (P2 전용 포함)
+========================= */
+#overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+}
+
+#overlay.active {
+  pointer-events: auto;
+}
+
+/* =========================
+   TITLE 화면
+========================= */
+.title-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: radial-gradient(circle at center, #1a1a1f 0%, #000 70%);
+}
+
+.title-panel {
+  width: 420px;
+  padding: 32px;
+  border-radius: 18px;
+
+  background: rgba(0,0,0,0.65);
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+
+  text-align: center;
+}
+
+.title-panel h1 {
+  margin: 0 0 24px;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.title-panel button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px;
+  font-size: 16px;
+
+  background: rgba(255,255,255,0.08);
+  color: white;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  cursor: pointer;
+}
+
+.title-panel button:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+/* =========================
+   P1 VIDEO
+========================= */
+.p1-video-wrap {
+  position: absolute;
+  inset: 0;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.p1-video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 꽉 차게 */
+}
+
+.video-skip {
+  position: absolute;
+  bottom: 24px;
+  right: 32px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  z-index: 5;
+}
+
+.video-skip:hover {
+  color: white;
+}
+
+/* =========================
+   P2 : Fake Browser
+========================= */
+.fakeBrowser {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+
+
+  width: 90%;
+  height: 65%;
+
+  background: #fff;
+  color: #000;
+  border-radius: 14px;
+  overflow: hidden;
+
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+}
+
+.browserTop {
+  height: 44px;
+  background: #cfeecd;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 10px;
+}
+
+.browserDots span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.browserDots .red { background: #ff5f56; }
+.browserDots .yellow { background: #ffbd2e; }
+.browserDots .green { background: #27c93f; }
+
+.addressBar {
+  flex: 1;
+  height: 26px;
+  background: #e7f6e5;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #222;
+}
+
+.tabBar {
+  display: flex;
+  gap: 6px;
+  padding: 6px 8px;
+  background: #d9f4d7;
+  border-bottom: 1px solid #b8e6b4;
+}
+
+.tabBtn {
+  padding: 6px 12px;
+  background: #e8f6e8;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.tabBtn.active {
+  background: #ffffff;
+  font-weight: bold;
+}
+
+.tabBtn.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+.browserBody {
+  padding: 16px;
+  height: calc(100% - 44px - 40px);
+  overflow-y: auto;
+  background: #ffffff;
+  font-size: 14px;
+}
+
+/* =========================
+   P3 NAME INPUT
+========================= */
+.p3-name-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.p3-panel {
+  width: 420px;
+  padding: 32px;
+  border-radius: 14px;
+
+  background: rgba(0,0,0,0.7);
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+
+  text-align: center;
+  transition: opacity 0.4s ease;
+}
+
+.p3-panel.locked {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.p3-title {
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  margin-bottom: 20px;
+  opacity: 0.7;
+}
+
+#playerNameInput {
+  width: 100%;
+  padding: 14px;
+  font-size: 18px;
+  text-align: center;
+
+  background: rgba(255,255,255,0.05);
+  color: white;
+
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 10px;
+  outline: none;
+}
+
+#playerNameInput::placeholder {
+  color: rgba(255,255,255,0.35);
+}
+
+#playerNameInput:focus {
+  border-color: rgba(255,255,255,0.6);
+}
+
+.p3-hint {
+  margin-top: 14px;
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+/* =========================
+   P4 DOCUMENT VIEW
+========================= */
+.documentView {
+  padding: 24px;
+  font-size: 15px;
+  color: #111;
+}
+
+.documentView h3 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+.docBlock {
+  background: #f5f5f5;
+  padding: 14px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.docBlock p {
+  margin: 6px 0;
+}
+
+.docNarration {
+  margin-top: 18px;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+.docNarration strong {
+  color: #000;
+}
+
+/* =========================
+   P5 선택 팝업
+========================= */
+
+.p5-wrap {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 210;
+}
+
+.p5-popup {
+  width: 360px;
+  padding: 24px;
+  background: rgba(0,0,0,0.85);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 14px;
+  text-align: center;
+}
+
+.p5-title {
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.p5-desc {
+  font-size: 14px;
+  opacity: 0.85;
+  margin-bottom: 20px;
+}
+
+.p5-buttons button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.p5-wrap.fade-out {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+/* =========================
+   P6 현실 침투 - 게임 화면 내부
+   (stage / objects 기준)
+========================= */
+
+/* 전체 어두운 레이어 */
+.p6-dark {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.9);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 120; /* 게임 오브젝트 위, UI 아래 */
+  pointer-events: none;
+}
+
+/* =========================
+   스마트폰 외형
+========================= */
+.phone {
+  width: 240px;
+  height: 420px;
+  border-radius: 28px;
+
+  background: #111;
+  border: 2px solid #333;
+
+  box-shadow:
+    0 0 40px rgba(255, 255, 255, 0.15),
+    inset 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+/* =========================
+   진동 효과
+========================= */
+.phone.shake {
+  animation: shake 0.14s infinite;
+}
+
+@keyframes shake {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(1px, -1px); }
+  50%  { transform: translate(-1px, 1px); }
+  75%  { transform: translate(1px, 1px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* =========================
+   폰 화면
+========================= */
+.phone-screen {
+  margin: 14px;
+  height: calc(100% - 28px);
+
+  background: #0b0b0e;
+  border-radius: 18px;
+  padding: 14px;
+
+  color: #eaeaea;
+  font-size: 14px;
+}
+
+.phone-header {
+  text-align: center;
+  opacity: 0.65;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+/* =========================
+   알림 카드
+========================= */
+.notification {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.sender {
+  font-size: 12px;
+  opacity: 0.6;
+  margin-bottom: 6px;
+}
+
+.message {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+
+/* =========================
+   P7 엔딩
+========================= */
+
+.p7-black {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  z-index: 5;
+}
+
+.p7-title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 2.5s ease;
+  z-index: 6;
+  color: white;
+  text-align: center;
+}
+
+.p7-title.show {
+  opacity: 1;
+}
+
+.p7-title .project {
+  font-size: 28px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.p7-title .subtitle {
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+/* =========================
+   P7 엔딩 타이틀
+========================= */
+
+.ending-title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  z-index: 50;
+}
+
+.ending-main {
+  font-size: 32px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.ending-sub {
+  font-size: 18px;
+  opacity: 0.8;
+}
