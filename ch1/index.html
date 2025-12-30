@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Project TRACE - Chapter 1</title>
+  <link rel="stylesheet" href="./styles/main.css" />
+</head>
+<body>
+  <div id="wrap">
+    <div id="app">
+      <!-- 상단: 메인 화면 -->
+      <main id="stage" aria-label="Game Stage">
+        <div id="hotspots" aria-label="Hotspots"></div>
+        <div id="stageOverlay"></div>
+      </main>
+
+      <!-- 우측: 아이콘/인벤토리 -->
+      <aside id="sidebar" aria-label="Sidebar">
+        <div class="sidePanel">
+          <div class="sideTitle">아이템</div>
+          <div id="inventory" class="inventoryGrid"></div>
+        </div>
+
+        <div class="sidePanel">
+          <div class="sideTitle">기타</div>
+          <button id="btnNotebook" class="sideBtn">수첩</button>
+          <button id="btnLog" class="sideBtn">로그</button>
+          <button id="btnSkip" class="sideBtn">스킵</button>
+        </div>
+      </aside>
+
+      <!-- 하단: 대화창 -->
+      <section id="dialogue" aria-label="Dialogue">
+        <div id="nameBox">SYSTEM</div>
+        <div id="textBox"></div>
+        <div id="actionTags" class="actionTags"></div>
+        <div id="choices" class="choices"></div>
+        <div id="progressBar" class="progressBar hidden">
+          <div id="progressText" class="progressText">남은 조사: 8 / 8</div>
+          <button id="btnComplete" class="progressBtn" disabled>조사 완료</button>
+        </div>
+        <div id="lifeBar" class="lifeBar"></div>
+        <div class="dialogueHint">Click / Space</div>
+      </section>
+
+
+      <!-- 수첩 패널 -->
+      <div id="notebook" class="modal hidden" role="dialog" aria-modal="true">
+        <div class="modalInner">
+          <div class="modalHeader">
+            <div>수첩 (증거)</div>
+            <button id="btnCloseNotebook" class="sideBtn">닫기</button>
+          </div>
+          <div id="notebookContent" class="modalBody"></div>
+        </div>
+      </div>
+
+      <!-- 로그 패널 -->
+      <div id="logModal" class="modal hidden" role="dialog" aria-modal="true">
+        <div class="modalInner">
+          <div class="modalHeader">
+            <div>대화 로그</div>
+            <button id="btnCloseLog" class="sideBtn">닫기</button>
+          </div>
+          <div id="logBody" class="modalBody"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
